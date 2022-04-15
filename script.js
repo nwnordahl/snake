@@ -1,8 +1,12 @@
+const body = document.body;
 const canvas = document.querySelector(".canvas");
 
 // Global variables
 const ROWS = 10;
 const COLUMNS = 10;
+let key = null;
+let x = null;
+let y = null;
 
 // Make canvas
 for (let i = 1; i <= ROWS; i++) {
@@ -40,17 +44,69 @@ function erase(coordinates) {
 // Draw loop
 draw(coordinates);
 setInterval(() => {
-  erase(coordinates);
-  coordinates = coordinates.map((coordinate) => {
-    let x = coordinate[0];
-    let y = coordinate[1];
+  switch (key) {
+    case "ArrowRight":
+      erase(coordinates);
 
-    if (y <= 1) {
-      y = 11;
-    }
+      x = coordinates[coordinates.length - 1][0];
+      y = coordinates[coordinates.length - 1][1];
 
-    return [x, y - 1];
-  });
-  console.log(coordinates);
-  draw(coordinates);
-}, 500);
+      if (x >= 10) {
+        x = 0;
+      }
+
+      coordinates.push([x + 1, y]);
+      coordinates.shift();
+
+      return draw(coordinates);
+
+    case "ArrowDown":
+      erase(coordinates);
+
+      x = coordinates[coordinates.length - 1][0];
+      y = coordinates[coordinates.length - 1][1];
+
+      if (y >= 10) {
+        y = 0;
+      }
+
+      coordinates.push([x, y + 1]);
+      coordinates.shift();
+
+      return draw(coordinates);
+
+    case "ArrowLeft":
+      erase(coordinates);
+
+      x = coordinates[coordinates.length - 1][0];
+      y = coordinates[coordinates.length - 1][1];
+
+      if (x <= 1) {
+        x = 11;
+      }
+
+      coordinates.push([x - 1, y]);
+      coordinates.shift();
+
+      return draw(coordinates);
+
+    case "ArrowUp":
+      erase(coordinates);
+
+      x = coordinates[coordinates.length - 1][0];
+      y = coordinates[coordinates.length - 1][1];
+
+      if (y <= 1) {
+        y = 11;
+      }
+
+      coordinates.push([x, y - 1]);
+      coordinates.shift();
+
+      return draw(coordinates);
+  }
+}, 300);
+
+body.addEventListener("keydown", (event) => {
+  key = event.key;
+});
