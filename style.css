@@ -13,14 +13,16 @@ body {
 
 .canvas {
   box-sizing: content-box;
-  border: 3px solid black;
+  border: 3px solid green;
   display: flex;
   flex-wrap: wrap;
   width: 50vw;
 }
 
-.square {
+.square, .food {
   height: calc(50vw / 10);
   width: calc(50vw / 10);
   border: 1px solid white;
 }
+
+.food
