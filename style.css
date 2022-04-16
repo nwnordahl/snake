@@ -13,8 +13,7 @@ body {
 
 .canvas {
   box-sizing: content-box;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  border: 3px solid black;
   display: flex;
   flex-wrap: wrap;
   width: 50vw;
@@ -23,6 +22,5 @@ body {
 .square {
   height: calc(50vw / 10);
   width: calc(50vw / 10);
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border: 1px solid white;
 }
